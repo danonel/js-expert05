@@ -52,7 +52,7 @@ describe("#Routes suite test", () => {
       };
 
       params.request.method = "inexistent";
-      routes.handler(...params.values());
+      await routes.handler(...params.values());
       expect(params.response.setHeader).toHaveBeenCalledWith(
         "Access-Control-Allow-Origin",
         "*"
@@ -67,9 +67,10 @@ describe("#Routes suite test", () => {
       };
 
       params.request.method = "OPTIONS";
+
       await routes.handler(...params.values());
+      expect(params.response.end).toHaveBeenCalledWith("hello");
       expect(params.response.writeHead).toHaveBeenCalledWith(204);
-      expect(params.response.end).toHaveBeenCalled();
     });
     test("given method POST it should choose options route", async () => {
       const routes = new Routes();

@@ -26,6 +26,7 @@ export default class Routes {
     response.writeHead(204);
     response.end("hello");
   }
+
   async post(request, response) {
     logger.info("post");
     response.end();
